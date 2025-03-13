@@ -1,0 +1,9 @@
+.qodo
+.vscode
+
+# Extensions
+*.exe
+*.json
+
+# Folder
+build
