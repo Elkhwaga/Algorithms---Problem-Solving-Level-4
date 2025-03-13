@@ -3,6 +3,7 @@
 
 namespace Check
 {
+    bool isLeapYear(short year);
 }
 
 #endif
