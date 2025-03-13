@@ -1,4 +1,4 @@
-#include "../include/check.hpp"
+#include "check.hpp"
 
 namespace Check
 {
