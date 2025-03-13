@@ -9,6 +9,7 @@ namespace InputNumber
     int randomNumber(int min, int max);
 
     int readNumberInRange(const std::string &message, int min, int max);
+
 }
 
 #endif
