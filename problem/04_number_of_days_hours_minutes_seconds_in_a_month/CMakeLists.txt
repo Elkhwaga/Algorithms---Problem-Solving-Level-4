@@ -1,0 +1,3 @@
+add_executable(number_of_days_hours_minutes_seconds_in_a_month src/main.cpp)
+
+target_link_libraries(number_of_days_hours_minutes_seconds_in_a_month date)
