@@ -7,11 +7,13 @@ namespace Date
 {
     std::string readYear();
 
+    std::string readMonth();
+
     short numberOfDaysInYear(short year);
 
     short numberOfHoursInYear(short year);
 
-    short numberOfMinutesInYear(short year);
+    int numberOfMinutesInYear(short year);
 
     int numberOfSecondsInYear(short year);
 
@@ -19,7 +21,7 @@ namespace Date
 
     short numberOfHoursInMonth(short month, short year);
 
-    short numberOfMinutesInMonth(short month, short year);
+    int numberOfMinutesInMonth(short month, short year);
 
     int numberOfSecondsInMonth(short month, short year);
 }

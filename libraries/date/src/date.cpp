@@ -10,11 +10,24 @@ namespace Date
     std::string readYear()
     {
         std::string input;
-        std::cout << "Enter a year (between 1000 and 9999): " << std::endl;
+        std::cout << "Enter a year (between 1000 and 9999): ";
         std::cin >> input;
         while (!InputValidation::isValidYear(input))
         {
             std::cout << "Enter a valid year (between 1000 and 9999): " << std::endl;
+            std::cin >> input;
+        }
+        return input;
+    }
+
+    std::string readMonth()
+    {
+        std::string input;
+        std::cout << "Enter a month (between 1 and 12): ";
+        std::cin >> input;
+        while (!InputValidation::isValidMonth(input))
+        {
+            std::cout << "Enter a valid month (between 1 and 12): " << std::endl;
             std::cin >> input;
         }
         return input;
@@ -30,7 +43,7 @@ namespace Date
         return numberOfDaysInYear(year) * static_cast<short>(DateType::HOUR);
     }
 
-    short numberOfMinutesInYear(short year)
+    int numberOfMinutesInYear(short year)
     {
         return numberOfHoursInYear(year) * static_cast<short>(DateType::MINUTE);
     }
@@ -72,7 +85,7 @@ namespace Date
         return numberOfDaysInMonth(month, year) * static_cast<short>(DateType::HOUR);
     }
 
-    short numberOfMinutesInMonth(short month, short year)
+    int numberOfMinutesInMonth(short month, short year)
     {
         return numberOfHoursInMonth(month, year) * static_cast<short>(DateType::MINUTE);
     }
