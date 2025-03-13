@@ -53,6 +53,7 @@ namespace Date
         return numberOfMinutesInYear(year) * static_cast<short>(DateType::SECOND);
     }
 
+    /*
     short numberOfDaysInMonth(short month, short year)
     {
         if (!Check::isNumberInRange(month, 1, 12))
@@ -78,6 +79,17 @@ namespace Date
         }
 
         return 0;
+    }
+    */
+
+    short numberOfDaysInMonth(short month, short year)
+    {
+        if (!Check::isNumberInRange(month, 1, 12))
+            return 0;
+
+        short daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        return (month == 2) ? (Check::isLeapYear(year) ? 29 : 28) : daysInMonth[month - 1];
     }
 
     short numberOfHoursInMonth(short month, short year)
