@@ -1,0 +1,3 @@
+add_executable(number_of_days_in_a_month_short_logic src/main.cpp)
+
+target_link_libraries(number_of_days_in_a_month_short_logic date)
