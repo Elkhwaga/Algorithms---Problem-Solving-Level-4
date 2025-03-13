@@ -14,6 +14,14 @@ namespace Date
     short numberOfMinutesInYear(short year);
 
     int numberOfSecondsInYear(short year);
+
+    short numberOfDaysInMonth(short month, short year);
+
+    short numberOfHoursInMonth(short month, short year);
+
+    short numberOfMinutesInMonth(short month, short year);
+
+    int numberOfSecondsInMonth(short month, short year);
 }
 
 #endif
