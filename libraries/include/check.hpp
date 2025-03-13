@@ -1,6 +1,6 @@
 #ifndef CHECK_H
 #define CHECK_H
-#include "./enums.hpp"
+#include "enums.hpp"
 
 namespace Check
 {
