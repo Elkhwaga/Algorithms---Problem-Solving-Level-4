@@ -4,7 +4,6 @@
 
 namespace InputString
 {
-    std::string readYear();
 }
 
 #endif
