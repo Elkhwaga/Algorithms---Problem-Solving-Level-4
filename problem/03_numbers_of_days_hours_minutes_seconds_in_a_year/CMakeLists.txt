@@ -1,0 +1,3 @@
+add_executable(numbers_of_days_hours_minutes_seconds_in_a_year src/main.cpp)
+
+target_link_libraries(numbers_of_days_hours_minutes_seconds_in_a_year date)
