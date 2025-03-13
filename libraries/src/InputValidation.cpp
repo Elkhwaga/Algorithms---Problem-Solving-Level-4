@@ -1,4 +1,4 @@
-#include "../include/InputValidation.hpp"
+#include "InputValidation.hpp"
 #include <cctype>
 
 namespace InputValidation

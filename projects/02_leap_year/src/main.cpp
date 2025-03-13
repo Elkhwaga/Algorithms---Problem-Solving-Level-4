@@ -1,8 +1,8 @@
 #include <iostream>
-#include "../../libraries/include/InputValidation.hpp"
-#include "../../libraries/include/utils.hpp"
-#include "../../libraries/include/enums.hpp"
-#include "../../libraries/include/check.hpp"
+#include "InputValidation.hpp"
+#include "utils.hpp"
+#include "enums.hpp"
+#include "check.hpp"
 
 int main()
 {
