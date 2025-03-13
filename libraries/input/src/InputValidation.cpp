@@ -25,4 +25,12 @@ namespace InputValidation
 
         return (std::stoi(year) >= 1000 && std::stoi(year) <= 9999);
     }
+
+    bool isValidMonth(const std::string &month)
+    {
+        if (checkLength(month, 2) && !checkDigitOnly(month))
+            return false;
+
+        return (std::stoi(month) >= 1 && std::stoi(month) <= 12);
+    }
 }
