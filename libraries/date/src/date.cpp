@@ -290,6 +290,15 @@ MyDate MyDate::increaseDateByXDays(unsigned short days, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneWeek(MyDate Date)
+{
+    for (unsigned short i = 1; i <= 7; i++)
+    {
+        Date = this->increaseDateByOneDay(Date);
+    }
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
