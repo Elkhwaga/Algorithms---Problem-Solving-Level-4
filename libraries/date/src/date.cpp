@@ -172,6 +172,16 @@ unsigned short MyDate::numberOfDaysFromBeginningOfTheYear(unsigned short day, un
 unsigned int MyDate::getdifferenceInDays(MyDate Date1, MyDate Date2, bool includeEnfDay)
 {
     unsigned int days = 0;
+    short swapFlag = 1;
+
+    if (IsDate1EqualDate2(Date1, Date2))
+        return includeEnfDay ? 1 : 0;
+
+    if (!IsDate1BeforeDate2(Date1, Date2))
+    {
+        MyDate::swapDate(Date1, Date2);
+        swapFlag = -1;
+    }
 
     while (IsDate1BeforeDate2(Date1, Date2))
     {
@@ -179,7 +189,7 @@ unsigned int MyDate::getdifferenceInDays(MyDate Date1, MyDate Date2, bool includ
         Date1 = Date1.increaseDateByOneDay(Date1);
     }
 
-    return includeEnfDay ? ++days : days;
+    return includeEnfDay ? ++days * swapFlag : days * swapFlag;
 }
 
 MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year)
@@ -304,6 +314,22 @@ bool MyDate::isLastDayInMonth(MyDate Date)
 bool MyDate::isLastMonthInYear(unsigned short month)
 {
     return (month == 12);
+}
+
+void MyDate::swapDate(MyDate &Date1, MyDate &Date2)
+{
+    MyDate Temp;
+    Temp.day = Date1.day;
+    Temp.month = Date1.month;
+    Temp.year = Date1.year;
+
+    Date1.day = Date2.day;
+    Date1.month = Date2.month;
+    Date1.year = Date2.year;
+
+    Date2.day = Temp.day;
+    Date2.month = Temp.month;
+    Date2.year = Temp.year;
 }
 
 void MyDate::printMonthCalendar(unsigned short month, unsigned short year)

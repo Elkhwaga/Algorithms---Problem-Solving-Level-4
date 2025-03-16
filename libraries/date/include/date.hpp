@@ -61,6 +61,8 @@ struct MyDate
 
     static bool isLastMonthInYear(unsigned short month);
 
+    static void swapDate(MyDate &Date1, MyDate &Date2);
+
     static void printMonthCalendar(unsigned short month, unsigned short year);
 
     static void printYearCalendar(unsigned short year);
