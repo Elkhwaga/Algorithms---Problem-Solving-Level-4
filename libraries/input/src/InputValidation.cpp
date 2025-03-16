@@ -3,7 +3,7 @@
 
 namespace InputValidation
 {
-    bool checkLength(const std::string &input, int requiredLength)
+    bool checkLength(const std::string &input, short requiredLength)
     {
         return input.length() == requiredLength;
     }
@@ -32,5 +32,21 @@ namespace InputValidation
             return false;
 
         return (std::stoi(month) >= 1 && std::stoi(month) <= 12);
+    }
+
+    bool isValidDayInWeek(const std::string &day)
+    {
+        if (checkLength(day, 1) && !checkDigitOnly(day))
+            return false;
+
+        return (std::stoi(day) >= 1 && std::stoi(day) <= 7);
+    }
+
+    bool isValidDayInMonth(const std::string &day)
+    {
+        if (checkLength(day, 2) && !checkDigitOnly(day))
+            return false;
+
+        return (std::stoi(day) >= 1 && std::stoi(day) <= 31);
     }
 }

@@ -6,6 +6,7 @@ enum class LeapYearType
 
 enum class DateType
 {
+    MONTH = 12,
     WEEK = 7,
     HOUR = 24,
     MINUTE = 60,

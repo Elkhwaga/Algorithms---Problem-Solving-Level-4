@@ -3,13 +3,13 @@
 
 void printDays(short month, short year)
 {
-    std::cout << "Number of days in month [" << month << "] is: " << Date::numberOfDaysInMonth(month, year) << std::endl;
+    std::cout << "Number of days in month [" << month << "] is: " << MyDate::numberOfDaysInMonth(month, year) << std::endl;
 }
 
 int main()
 {
-    std::string year = Date::readYear();
-    std::string month = Date::readMonth();
+    std::string year = MyDate::readYear();
+    std::string month = MyDate::readMonth();
 
     printDays(std::stoi(month), std::stoi(year));
 }

@@ -1,7 +1,7 @@
 #include "InputNumber.hpp"
 #include <iostream>
 
-std::string numberToText(int num)
+std::string numberToText(unsigned int num)
 {
     std::string result;
     if (num == 0)
@@ -79,7 +79,7 @@ std::string numberToText(int num)
 
 int main()
 {
-    int number = InputNumber::readNumber("Enter a number: ");
+    unsigned int number = InputNumber::readNumber("Enter a number: ");
     std::cout << numberToText(number) << std::endl;
     return 0;
 }
