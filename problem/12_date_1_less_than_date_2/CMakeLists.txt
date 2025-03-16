@@ -1,0 +1,3 @@
+add_executable(date_1_less_than_date_2 src/main.cpp)
+
+target_link_libraries(date_1_less_than_date_2 date)
