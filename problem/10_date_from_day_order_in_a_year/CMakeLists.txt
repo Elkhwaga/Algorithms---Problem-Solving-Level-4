@@ -1,0 +1,3 @@
+add_executable(date_from_day_order_in_a_year src/main.cpp)
+
+target_link_libraries(date_from_day_order_in_a_year date)
