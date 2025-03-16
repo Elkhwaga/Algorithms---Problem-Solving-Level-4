@@ -49,9 +49,11 @@ struct MyDate
 
     MyDate dateAddDays(unsigned short days);
 
+    MyDate getSystemDate();
+
     MyDate increaseDateByOneDay(MyDate Date);
 
-    MyDate getSystemDate();
+    MyDate increaseDateByXDays(unsigned short days, MyDate Date);
 
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
