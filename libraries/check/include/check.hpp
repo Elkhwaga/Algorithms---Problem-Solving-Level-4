@@ -3,8 +3,8 @@
 
 namespace Check
 {
-    bool isLeapYear(short year);
-    bool isNumberInRange(short number, short min, short max);
+    bool isLeapYear(unsigned short year);
+    bool isNumberInRange(unsigned short number, unsigned short min, unsigned short max);
 }
 
 #endif
