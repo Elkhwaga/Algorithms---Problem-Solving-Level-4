@@ -1,0 +1,3 @@
+add_executable(diff_in_days_negative_days src/main.cpp)
+
+target_link_libraries(diff_in_days_negative_days date)
