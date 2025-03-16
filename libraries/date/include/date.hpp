@@ -1,29 +1,69 @@
-#ifndef DATE_H
-#define DATE_H
+#ifndef MYDATE_H
+#define MYDATE_H
 
 #include <string>
 
-namespace Date
+struct MyDate
 {
-    std::string readYear();
+    unsigned short day;
+    unsigned short month;
+    unsigned short year;
 
-    std::string readMonth();
+    static std::string readYear();
 
-    short numberOfDaysInYear(short year);
+    static std::string readMonth();
 
-    short numberOfHoursInYear(short year);
+    static std::string readDayInWeek();
 
-    int numberOfMinutesInYear(short year);
+    static std::string readDayInMonth();
 
-    int numberOfSecondsInYear(short year);
+    static unsigned short numberOfDaysInYear(unsigned short year);
 
-    short numberOfDaysInMonth(short month, short year);
+    static unsigned short numberOfHoursInYear(unsigned short year);
 
-    short numberOfHoursInMonth(short month, short year);
+    static unsigned int numberOfMinutesInYear(unsigned short year);
 
-    int numberOfMinutesInMonth(short month, short year);
+    static unsigned int numberOfSecondsInYear(unsigned short year);
 
-    int numberOfSecondsInMonth(short month, short year);
-}
+    static unsigned short numberOfDaysInMonth(unsigned short month, unsigned short year);
+
+    static unsigned short numberOfHoursInMonth(unsigned short month, unsigned short year);
+
+    static unsigned int numberOfMinutesInMonth(unsigned short month, unsigned short year);
+
+    static unsigned int numberOfSecondsInMonth(unsigned short month, unsigned short year);
+
+    static unsigned short dayOfWeekOrder(unsigned short day, unsigned short month, unsigned short year);
+
+    static std::string dayShortName(unsigned short dayOfWeekOrder);
+
+    static std::string monthShortName(unsigned short monthNumber);
+
+    static unsigned short numberOfDaysFromBeginningOfTheYear(unsigned short day, unsigned short month, unsigned short year);
+
+    static unsigned int getdifferenceInDays(MyDate Date1, MyDate Date2, bool includeEnfDay = false);
+
+    MyDate getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year);
+
+    MyDate readFullDate();
+
+    MyDate dateAddDays(unsigned short days);
+
+    MyDate increaseDateByOneDay(MyDate Date);
+
+    MyDate getSystemDate();
+
+    static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
+
+    static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
+
+    static bool isLastDayInMonth(MyDate Date);
+
+    static bool isLastMonthInYear(unsigned short month);
+
+    static void printMonthCalendar(unsigned short month, unsigned short year);
+
+    static void printYearCalendar(unsigned short year);
+};
 
 #endif
