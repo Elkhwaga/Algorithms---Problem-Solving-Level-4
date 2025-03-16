@@ -6,7 +6,7 @@ int main()
 {
     MyDate date = date.readFullDate();
     unsigned short days = InputNumber::readNumberInRange("Enter a number of days: ", 1, 2000);
-    date = date.increaseDateByOneDay(date);
+    date = date.increaseDateByXDays(days, date);
 
     std::cout << "\nAdding " << days << " days is: "
               << date.day << "/" << date.month << "/" << date.year << std::endl;
