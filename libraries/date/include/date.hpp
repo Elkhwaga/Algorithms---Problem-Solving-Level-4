@@ -57,6 +57,8 @@ struct MyDate
 
     MyDate increaseDateByOneWeek(MyDate Date);
 
+    MyDate increaseDateByXWeeks(unsigned short weeks, MyDate Date);
+
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
     static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
