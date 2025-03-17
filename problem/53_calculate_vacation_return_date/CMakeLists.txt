@@ -1,0 +1,3 @@
+add_executable(calculate_vacation_return_date src/main.cpp)
+
+target_link_libraries(calculate_vacation_return_date date)
