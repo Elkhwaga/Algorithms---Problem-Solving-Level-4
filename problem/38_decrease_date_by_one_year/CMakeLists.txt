@@ -1,0 +1,3 @@
+add_executable(decrease_date_by_one_year src/main.cpp)
+
+target_link_libraries(decrease_date_by_one_year date)
