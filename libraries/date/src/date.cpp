@@ -569,6 +569,31 @@ MyDate MyDate::decreaseDateByOneMillennium(MyDate Date)
     return Date;
 }
 
+MyDate MyDate::calculateVacationDays(MyDate DateOfVacationStart, unsigned short vacationDays)
+{
+    short weekEnds = 0;
+
+    while (this->isWeekEnd(DateOfVacationStart))
+    {
+        DateOfVacationStart = this->increaseDateByOneDay(DateOfVacationStart);
+    }
+
+    for (unsigned short i = 0; i < vacationDays + weekEnds; i++)
+    {
+        if (this->isWeekEnd(DateOfVacationStart))
+            weekEnds++;
+
+        DateOfVacationStart = this->increaseDateByOneDay(DateOfVacationStart);
+    }
+
+    while (this->isWeekEnd(DateOfVacationStart))
+    {
+        DateOfVacationStart = this->decreaseDateByOneDay(DateOfVacationStart);
+    }
+
+    return DateOfVacationStart;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);

@@ -117,6 +117,8 @@ struct MyDate
 
     MyDate decreaseDateByOneMillennium(MyDate Date);
 
+    MyDate calculateVacationDays(MyDate DateOfVacationStart, unsigned short vacationDays);
+
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
     static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
