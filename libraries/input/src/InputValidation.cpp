@@ -51,13 +51,15 @@ namespace InputValidation
     }
     bool isValidDateFormat(const std::string &dateStr, std::string delem)
     {
-        // Check if the string length is correct (10 characters for DD/MM/YYYY)
-        if (dateStr.length() != 10)
+        // Check if the string length is correct
+        // For DD<delim>MM<delim>YYYY, the length should be 10 + (delem.length() - 1) * 2
+        unsigned short expectedLength = 8 + delem.length() * 2;
+        if (dateStr.length() != expectedLength)
         {
             return false;
         }
 
-        // Check if the separators are '/'
+        // Check if the separators match the delimiter
         if (dateStr.substr(2, delem.length()) != delem || dateStr.substr(5 + delem.length() - 1, delem.length()) != delem)
         {
             return false;
@@ -66,8 +68,8 @@ namespace InputValidation
         // Check if all other characters are digits
         for (unsigned short i = 0; i < dateStr.length(); ++i)
         {
-            // Skip the separators
-            if (i == 2 || i == 5)
+            // Skip the delimiter positions
+            if (i == 2 || i == 5 + delem.length() - 1)
                 continue;
 
             // Check if the character is a digit
