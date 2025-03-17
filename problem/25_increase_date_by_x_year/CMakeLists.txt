@@ -1,0 +1,3 @@
+add_executable(increase_date_by_x_year src/main.cpp)
+
+target_link_libraries(increase_date_by_x_year date input)
