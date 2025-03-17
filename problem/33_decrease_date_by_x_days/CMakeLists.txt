@@ -1,0 +1,3 @@
+add_executable(decrease_date_by_x_days src/main.cpp)
+
+target_link_libraries(decrease_date_by_x_days date input)
