@@ -1,0 +1,3 @@
+add_executable(increase_date_by_x_week src/main.cpp)
+
+target_link_libraries(increase_date_by_x_week date input)
