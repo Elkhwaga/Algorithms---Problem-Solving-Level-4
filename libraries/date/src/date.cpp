@@ -381,6 +381,12 @@ MyDate MyDate::increaseDateByXDecadesFaster(unsigned short decade, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneCentury(MyDate Date)
+{
+    Date.year += 100;
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
