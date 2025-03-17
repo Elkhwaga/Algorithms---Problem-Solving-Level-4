@@ -12,6 +12,17 @@ bool Validation::isValidDate(MyDate Date)
     return true;
 }
 
+bool Validation::isValidDate(unsigned short day, unsigned short month, unsigned short year)
+{
+    if (day > MyDate::numberOfDaysInMonth(month, year))
+    {
+        std::cout << "\n=== enter a valid date ===\n"
+                  << std::endl;
+        return false;
+    }
+    return true;
+}
+
 bool Validation::isFirstDayInMonth(MyDate Date)
 {
     return (Date.day == 1);

@@ -49,4 +49,34 @@ namespace InputValidation
 
         return (std::stoi(day) >= 1 && std::stoi(day) <= 31);
     }
+    bool isValidDateFormat(const std::string &dateStr, std::string delem)
+    {
+        // Check if the string length is correct (10 characters for DD/MM/YYYY)
+        if (dateStr.length() != 10)
+        {
+            return false;
+        }
+
+        // Check if the separators are '/'
+        if (dateStr.substr(2, delem.length()) != delem || dateStr.substr(5 + delem.length() - 1, delem.length()) != delem)
+        {
+            return false;
+        }
+
+        // Check if all other characters are digits
+        for (unsigned short i = 0; i < dateStr.length(); ++i)
+        {
+            // Skip the separators
+            if (i == 2 || i == 5)
+                continue;
+
+            // Check if the character is a digit
+            if (!isdigit(dateStr[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

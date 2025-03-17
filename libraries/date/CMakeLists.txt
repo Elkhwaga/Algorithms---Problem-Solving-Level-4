@@ -6,6 +6,7 @@ add_library(date STATIC
     src/increase.cpp
     src/period.cpp
     src/ReadDate.cpp
+    src/StringDate.cpp
     src/validation.cpp
     src/work.cpp
 )

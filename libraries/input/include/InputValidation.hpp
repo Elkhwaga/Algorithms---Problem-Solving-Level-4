@@ -11,6 +11,7 @@ namespace InputValidation
     bool isValidMonth(const std::string &month);
     bool isValidDayInWeek(const std::string &day);
     bool isValidDayInMonth(const std::string &day);
+    bool isValidDateFormat(const std::string &dateStr, std::string delem = "/");
 }
 
 #endif

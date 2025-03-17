@@ -9,6 +9,8 @@ struct MyDate
     unsigned short month;
     unsigned short year;
 
+    MyDate getSystemDate();
+
     static unsigned short numberOfDaysInYear(unsigned short year);
 
     static unsigned short numberOfHoursInYear(unsigned short year);
@@ -40,8 +42,6 @@ struct MyDate
     MyDate getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year);
 
     MyDate dateAddDays(unsigned short days);
-
-    MyDate getSystemDate();
 
     static void swapDate(MyDate &Date1, MyDate &Date2);
 };

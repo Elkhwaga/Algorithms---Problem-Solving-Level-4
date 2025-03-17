@@ -1,0 +1,3 @@
+add_executable(read_print_date_string src/main.cpp)
+
+target_link_libraries(read_print_date_string date)

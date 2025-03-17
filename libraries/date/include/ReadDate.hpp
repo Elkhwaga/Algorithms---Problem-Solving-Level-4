@@ -14,6 +14,8 @@ namespace ReadDate
 
     std::string readYear();
 
+    std::string readFullDateString(const std::string &message, const std::string &errorMessage, std::string delem = "/");
+
     MyDate readFullDate();
 }
 
