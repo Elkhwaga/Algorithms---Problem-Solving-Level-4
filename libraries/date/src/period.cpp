@@ -24,6 +24,13 @@ bool Period::IsOverlapPeriod(Period Period1, Period Period2)
         (Compare::compareDate(Period2.start, Period1.end) == DateCompare::AFTER));
 }
 
+bool Period::isDateInPeriod(MyDate Date, Period Period)
+{
+    return !(
+        (Compare::compareDate(Date, Period.start) == DateCompare::BEFORE) ||
+        (Compare::compareDate(Date, Period.end) == DateCompare::AFTER));
+}
+
 unsigned int Period::periodLengthInDays(Period Period, bool includeEndDate)
 {
     return MyDate::getDifferenceInDays(Period.start, Period.end, includeEndDate);
