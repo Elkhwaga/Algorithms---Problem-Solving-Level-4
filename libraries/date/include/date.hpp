@@ -59,9 +59,15 @@ struct MyDate
 
     MyDate increaseDateByXWeeks(unsigned short weeks, MyDate Date);
 
+    MyDate increaseDateByOneMonth(MyDate Date);
+
+    MyDate increaseDateByXMonth(unsigned short months, MyDate Date);
+
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
     static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
+
+    static bool isValidDate(MyDate Date);
 
     static bool isLastDayInMonth(MyDate Date);
 

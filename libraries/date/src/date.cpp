@@ -220,11 +220,15 @@ MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned
 
 MyDate MyDate::readFullDate()
 {
-    this->day = std::stoi(this->readDayInMonth());
-    this->month = std::stoi(this->readMonth());
-    this->year = std::stoi(this->readYear());
+    MyDate Date;
+    do
+    {
+        Date.day = std::stoi(this->readDayInMonth());
+        Date.month = std::stoi(this->readMonth());
+        Date.year = std::stoi(this->readYear());
+    } while (!(this->isValidDate(Date)));
 
-    return *this;
+    return Date;
 }
 
 MyDate MyDate::dateAddDays(unsigned short days)
@@ -308,6 +312,33 @@ MyDate MyDate::increaseDateByXWeeks(unsigned short weeks, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneMonth(MyDate Date)
+{
+    if (this->isLastMonthInYear(Date.month))
+    {
+        Date.month = 1;
+        Date.year++;
+    }
+    else
+        Date.month++;
+
+    unsigned short numberOfDaysInCurrentMonth = this->numberOfDaysInMonth(Date.month, Date.year);
+
+    if (Date.day > numberOfDaysInCurrentMonth)
+        Date.day = numberOfDaysInCurrentMonth;
+
+    return Date;
+}
+
+MyDate MyDate::increaseDateByXMonth(unsigned short months, MyDate Date)
+{
+    for (unsigned short i = 1; i <= months; i++)
+    {
+        Date = this->increaseDateByOneMonth(Date);
+    }
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
@@ -332,6 +363,17 @@ bool MyDate::IsDate1EqualDate2(MyDate Date1, MyDate Date2)
     return (Date1.year == Date2.year)
                ? ((Date1.month == Date2.month) ? ((Date1.day == Date2.day) ? true : false) : false)
                : false;
+}
+
+bool MyDate::isValidDate(MyDate Date)
+{
+    if (Date.day > numberOfDaysInMonth(Date.month, Date.year))
+    {
+        std::cout << "\n=== enter a valid date ===\n"
+                  << std::endl;
+        return false;
+    }
+    return true;
 }
 
 bool MyDate::isLastDayInMonth(MyDate Date)
