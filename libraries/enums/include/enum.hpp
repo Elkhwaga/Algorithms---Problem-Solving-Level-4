@@ -1,3 +1,6 @@
+#ifndef ENUM_HPP
+#define ENUM_HPP
+
 enum class LeapYearType
 {
     NOT_LEAP_YEAR,
@@ -19,3 +22,5 @@ enum class DateCompare
     EQUAL = 0,
     AFTER = 1
 };
+
+#endif
