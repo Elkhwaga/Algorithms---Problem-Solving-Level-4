@@ -1,5 +1,6 @@
-#include <iostream>
 #include "date.hpp"
+#include "ReadDate.hpp"
+#include <iostream>
 
 void printResult(unsigned short day, unsigned short month, unsigned short year)
 {
@@ -9,9 +10,9 @@ void printResult(unsigned short day, unsigned short month, unsigned short year)
 
 int main()
 {
-    unsigned short year = std::stoi(MyDate::readYear());
-    unsigned short month = std::stoi(MyDate::readMonth());
-    unsigned short day = std::stoi(MyDate::readDayInMonth());
+    unsigned short year = std::stoi(ReadDate::readYear());
+    unsigned short month = std::stoi(ReadDate::readMonth());
+    unsigned short day = std::stoi(ReadDate::readDayInWeek());
 
     printResult(day, month, year);
     return 0;

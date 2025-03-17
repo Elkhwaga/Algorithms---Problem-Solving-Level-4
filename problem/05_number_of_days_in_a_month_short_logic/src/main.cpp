@@ -1,5 +1,6 @@
-#include <iostream>
 #include "date.hpp"
+#include "ReadDate.hpp"
+#include <iostream>
 
 void printDays(short month, short year)
 {
@@ -8,8 +9,8 @@ void printDays(short month, short year)
 
 int main()
 {
-    std::string year = MyDate::readYear();
-    std::string month = MyDate::readMonth();
+    unsigned short year = std::stoi(ReadDate::readYear());
+    unsigned short month = std::stoi(ReadDate::readMonth());
 
-    printDays(std::stoi(month), std::stoi(year));
+    printDays(month, year);
 }

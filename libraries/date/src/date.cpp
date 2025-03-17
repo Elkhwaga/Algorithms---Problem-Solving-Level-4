@@ -1,62 +1,24 @@
 #pragma warning(disable : 4996)
 
 #include "date.hpp"
+#include "increase.hpp"
+#include "compare.hpp"
 #include "utils.hpp"
 #include "check.hpp"
-#include "InputValidation.hpp"
+#include "enum.hpp"
 #include <iostream>
 #include <ctime>
 
-std::string MyDate::readYear()
+MyDate MyDate::getSystemDate()
 {
-    std::string input;
-    std::cout << "Enter a year (between 1000 and 9999): ";
-    std::cin >> input;
-    while (!InputValidation::isValidYear(input))
-    {
-        std::cout << "Enter a valid year (between 1000 and 9999): " << std::endl;
-        std::cin >> input;
-    }
-    return input;
-}
+    time_t t = time(0);
+    std::tm *now = localtime(&t);
 
-std::string MyDate::readMonth()
-{
-    std::string input;
-    std::cout << "Enter a month (between 1 and 12): ";
-    std::cin >> input;
-    while (!InputValidation::isValidMonth(input))
-    {
-        std::cout << "Enter a valid month (between 1 and 12): " << std::endl;
-        std::cin >> input;
-    }
-    return input;
-}
+    this->year = (unsigned short)(now->tm_year + 1900);
+    this->month = (unsigned short)(now->tm_mon + 1);
+    this->day = (unsigned short)(now->tm_mday);
 
-std::string MyDate::readDayInWeek()
-{
-    std::string input;
-    std::cout << "Enter a day (between 1 and 7): ";
-    std::cin >> input;
-    while (!InputValidation::isValidDayInWeek(input))
-    {
-        std::cout << "Enter a valid day (between 1 and 7): " << std::endl;
-        std::cin >> input;
-    }
-    return input;
-}
-
-std::string MyDate::readDayInMonth()
-{
-    std::string input;
-    std::cout << "Enter a day (between 1 and 31): ";
-    std::cin >> input;
-    while (!InputValidation::isValidDayInMonth(input))
-    {
-        std::cout << "Enter a valid day (between 1 and 31): " << std::endl;
-        std::cin >> input;
-    }
-    return input;
+    return *this;
 }
 
 unsigned short MyDate::numberOfDaysInYear(unsigned short year)
@@ -173,67 +135,27 @@ unsigned short MyDate::numberOfDaysFromBeginningOfTheYear(unsigned short day, un
     return totalDays += day;
 }
 
-unsigned int MyDate::getdifferenceInDays(MyDate Date1, MyDate Date2, bool includeEnfDay)
+unsigned int MyDate::getDifferenceInDays(MyDate Date1, MyDate Date2, bool includeEnfDay)
 {
     unsigned int days = 0;
     short swapFlag = 1;
 
-    if (IsDate1EqualDate2(Date1, Date2))
+    if (Compare::isDate1EqualDate2(Date1, Date2))
         return includeEnfDay ? 1 : 0;
 
-    if (!IsDate1BeforeDate2(Date1, Date2))
+    if (!Compare::isDate1BeforeDate2(Date1, Date2))
     {
         MyDate::swapDate(Date1, Date2);
         swapFlag = -1;
     }
 
-    while (IsDate1BeforeDate2(Date1, Date2))
+    while (Compare::isDate1BeforeDate2(Date1, Date2))
     {
         days++;
-        Date1 = Date1.increaseDateByOneDay(Date1);
+        Date1 = Increase::increaseDateByOneDay(Date1);
     }
 
     return includeEnfDay ? ++days * swapFlag : days * swapFlag;
-}
-
-unsigned short MyDate::daysUtilTheEndOfWeek(MyDate Date)
-{
-    return 6 - dayOfWeekOrder(Date);
-}
-
-unsigned short MyDate::daysUtilTheEndOfMonth(MyDate Date)
-{
-    MyDate EndOfMonthDate;
-    EndOfMonthDate.day = numberOfDaysInMonth(Date.month, Date.year);
-    EndOfMonthDate.month = Date.month;
-    EndOfMonthDate.year = Date.year;
-
-    return getdifferenceInDays(Date, EndOfMonthDate, true);
-}
-
-unsigned short MyDate::daysUtilTheEndOfYear(MyDate Date)
-{
-    MyDate EndOfYearDate;
-    EndOfYearDate.day = 31;
-    EndOfYearDate.month = 12;
-    EndOfYearDate.year = Date.year;
-
-    return getdifferenceInDays(Date, EndOfYearDate, true);
-}
-
-unsigned short MyDate::calculateVacationDays(MyDate DateOfVacationStart, MyDate DateOfVacationEnd)
-{
-    unsigned short days = 0;
-
-    while (IsDate1BeforeDate2(DateOfVacationStart, DateOfVacationEnd))
-    {
-        if (isBusinessDay(DateOfVacationStart))
-            days++;
-
-        DateOfVacationStart = DateOfVacationStart.increaseDateByOneDay(DateOfVacationStart);
-    }
-
-    return days;
 }
 
 MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year)
@@ -260,19 +182,6 @@ MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned
         }
     }
     return *this;
-}
-
-MyDate MyDate::readFullDate()
-{
-    MyDate Date;
-    do
-    {
-        Date.day = std::stoi(this->readDayInMonth());
-        Date.month = std::stoi(this->readMonth());
-        Date.year = std::stoi(this->readYear());
-    } while (!(this->isValidDate(Date)));
-
-    return Date;
 }
 
 MyDate MyDate::dateAddDays(unsigned short days)
@@ -304,373 +213,6 @@ MyDate MyDate::dateAddDays(unsigned short days)
     return *this;
 }
 
-MyDate MyDate::increaseDateByOneDay(MyDate Date)
-{
-    if (this->isLastDayInMonth(Date))
-    {
-        if (this->isLastMonthInYear(Date.month))
-        {
-            Date.month = 1;
-            Date.day = 1;
-            Date.year++;
-        }
-        else
-        {
-            Date.day = 1;
-            Date.month++;
-        }
-    }
-    else
-    {
-        Date.day++;
-    }
-
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXDays(unsigned short days, MyDate Date)
-{
-    for (unsigned short i = 1; i <= days; i++)
-    {
-        Date = this->increaseDateByOneDay(Date);
-    }
-
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneWeek(MyDate Date)
-{
-    for (unsigned short i = 1; i <= 7; i++)
-    {
-        Date = this->increaseDateByOneDay(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXWeeks(unsigned short weeks, MyDate Date)
-{
-    for (unsigned short i = 1; i <= weeks; i++)
-    {
-        Date = this->increaseDateByOneWeek(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneMonth(MyDate Date)
-{
-    if (this->isLastMonthInYear(Date.month))
-    {
-        Date.month = 1;
-        Date.year++;
-    }
-    else
-        Date.month++;
-
-    unsigned short numberOfDaysInCurrentMonth = this->numberOfDaysInMonth(Date.month, Date.year);
-
-    if (Date.day > numberOfDaysInCurrentMonth)
-        Date.day = numberOfDaysInCurrentMonth;
-
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXMonth(unsigned short months, MyDate Date)
-{
-    for (unsigned short i = 1; i <= months; i++)
-    {
-        Date = this->increaseDateByOneMonth(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneYear(MyDate Date)
-{
-    Date.year++;
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXYear(unsigned short years, MyDate Date)
-{
-    for (unsigned short i = 1; i <= years; i++)
-    {
-        Date = this->increaseDateByOneYear(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXYearFaster(unsigned short years, MyDate Date)
-{
-    Date.year += years;
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneDecade(MyDate Date)
-{
-    Date.year += 10;
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXDecade(unsigned short decade, MyDate Date)
-{
-    for (unsigned short i = 1; i <= decade; i++)
-    {
-        Date = this->increaseDateByOneDecade(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::increaseDateByXDecadesFaster(unsigned short decade, MyDate Date)
-{
-    Date.year += (decade * 10);
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneCentury(MyDate Date)
-{
-    Date.year += 100;
-    return Date;
-}
-
-MyDate MyDate::increaseDateByOneMillennium(MyDate Date)
-{
-    Date.year += 1000;
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneDay(MyDate Date)
-{
-    if (this->isFirstDayInMonth(Date))
-    {
-        if (this->isFirstMonthInYear(Date.month))
-        {
-            Date.month = 12;
-            Date.day = 31;
-            Date.year--;
-        }
-        else
-        {
-            Date.day = this->numberOfDaysInMonth(Date.month, Date.year);
-            Date.month--;
-        }
-    }
-    else
-    {
-        Date.day--;
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXDays(unsigned short days, MyDate Date)
-{
-    for (unsigned short i = 1; i <= days; i++)
-    {
-        Date = this->decreaseDateByOneDay(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneWeek(MyDate Date)
-{
-    for (unsigned short i = 1; i <= 7; i++)
-    {
-        Date = this->decreaseDateByOneDay(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXWeeks(unsigned short weeks, MyDate Date)
-{
-    for (unsigned short i = 1; i <= weeks; i++)
-    {
-        Date = this->decreaseDateByOneWeek(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneMonth(MyDate Date)
-{
-    if (this->isFirstMonthInYear(Date.month))
-    {
-        Date.month = 12;
-        Date.year--;
-    }
-    else
-        Date.month--;
-
-    unsigned short numberOfDaysInCurrentMonth = this->numberOfDaysInMonth(Date.month, Date.year);
-
-    if (Date.day > numberOfDaysInCurrentMonth)
-        Date.day = numberOfDaysInCurrentMonth;
-
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXMonth(unsigned short months, MyDate Date)
-{
-    for (unsigned short i = 1; i <= months; i++)
-    {
-        Date = this->decreaseDateByOneMonth(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneYear(MyDate Date)
-{
-    Date.year--;
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXYear(unsigned short years, MyDate Date)
-{
-    for (unsigned short i = 1; i <= years; i++)
-    {
-        Date = this->decreaseDateByOneYear(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXYearFaster(unsigned short years, MyDate Date)
-{
-    Date.year -= years;
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneDecade(MyDate Date)
-{
-    Date.year -= 10;
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXDecade(unsigned short decade, MyDate Date)
-{
-    for (unsigned short i = 1; i <= decade; i++)
-    {
-        Date = this->decreaseDateByOneDecade(Date);
-    }
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByXDecadesFaster(unsigned short decade, MyDate Date)
-{
-    Date.year -= (decade * 10);
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneCentury(MyDate Date)
-{
-    Date.year -= 100;
-    return Date;
-}
-
-MyDate MyDate::decreaseDateByOneMillennium(MyDate Date)
-{
-    Date.year -= 1000;
-    return Date;
-}
-
-MyDate MyDate::calculateVacationDays(MyDate DateOfVacationStart, unsigned short vacationDays)
-{
-    short weekEnds = 0;
-
-    while (this->isWeekEnd(DateOfVacationStart))
-    {
-        DateOfVacationStart = this->increaseDateByOneDay(DateOfVacationStart);
-    }
-
-    for (unsigned short i = 0; i < vacationDays + weekEnds; i++)
-    {
-        if (this->isWeekEnd(DateOfVacationStart))
-            weekEnds++;
-
-        DateOfVacationStart = this->increaseDateByOneDay(DateOfVacationStart);
-    }
-
-    while (this->isWeekEnd(DateOfVacationStart))
-    {
-        DateOfVacationStart = this->decreaseDateByOneDay(DateOfVacationStart);
-    }
-
-    return DateOfVacationStart;
-}
-
-MyDate MyDate::getSystemDate()
-{
-    time_t t = time(0);
-    std::tm *now = localtime(&t);
-
-    this->year = (unsigned short)(now->tm_year + 1900);
-    this->month = (unsigned short)(now->tm_mon + 1);
-    this->day = (unsigned short)(now->tm_mday);
-
-    return *this;
-}
-
-bool MyDate::IsDate1BeforeDate2(MyDate Date1, MyDate Date2)
-{
-    return (Date1.year < Date2.year)
-               ? true
-               : ((Date1.year == Date2.year) ? (Date1.month < Date2.month ? true : (Date1.month == Date2.month ? Date1.day < Date2.day : false)) : false);
-}
-
-bool MyDate::IsDate1AfterDate2(MyDate Date1, MyDate Date2)
-{
-    return !IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualDate2(Date1, Date2);
-}
-
-bool MyDate::IsDate1EqualDate2(MyDate Date1, MyDate Date2)
-{
-    return (Date1.year == Date2.year)
-               ? ((Date1.month == Date2.month) ? ((Date1.day == Date2.day) ? true : false) : false)
-               : false;
-}
-
-bool MyDate::isValidDate(MyDate Date)
-{
-    if (Date.day > numberOfDaysInMonth(Date.month, Date.year))
-    {
-        std::cout << "\n=== enter a valid date ===\n"
-                  << std::endl;
-        return false;
-    }
-    return true;
-}
-
-bool MyDate::isFirstDayInMonth(MyDate Date)
-{
-    return (Date.day == 1);
-}
-
-bool MyDate::isLastDayInMonth(MyDate Date)
-{
-    return (Date.day == numberOfDaysInMonth(Date.month, Date.year));
-}
-
-bool MyDate::isFirstMonthInYear(unsigned short month)
-{
-    return month == 1;
-}
-
-bool MyDate::isLastMonthInYear(unsigned short month)
-{
-    return (month == 12);
-}
-
-bool MyDate::isEndOfWeek(MyDate Date)
-{
-    return dayOfWeekOrder(Date) == 6;
-}
-
-bool MyDate::isWeekEnd(MyDate Date)
-{
-    unsigned short day = dayOfWeekOrder(Date);
-    return (day == 5 || day == 6);
-}
-
-bool MyDate::isBusinessDay(MyDate Date)
-{
-    return !isWeekEnd(Date);
-}
-
 void MyDate::swapDate(MyDate &Date1, MyDate &Date2)
 {
     MyDate Temp;
@@ -685,55 +227,4 @@ void MyDate::swapDate(MyDate &Date1, MyDate &Date2)
     Date2.day = Temp.day;
     Date2.month = Temp.month;
     Date2.year = Temp.year;
-}
-
-void MyDate::printMonthCalendar(unsigned short month, unsigned short year)
-{
-    unsigned short current = dayOfWeekOrder(1, month, year);
-    unsigned short numberOfDays = numberOfDaysInMonth(month, year);
-
-    printf("\n ________________%s________________\n\n", monthShortName(month).c_str());
-
-    printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
-
-    unsigned short i;
-    for (i = 0; i < current; i++)
-    {
-        printf("     ");
-    }
-
-    for (unsigned short j = 1; j <= numberOfDays; j++)
-    {
-        printf("%5d", j);
-        if (++i == 7)
-        {
-            i = 0;
-            printf("\n");
-        }
-    }
-
-    printf("\n __________________________________\n");
-}
-
-void MyDate::printYearCalendar(unsigned short year)
-{
-    printf("\n __________________________________\n");
-    printf("\tCalendar - %d", year);
-    printf("\n __________________________________\n");
-
-    for (unsigned short i = 1; i < 12; i++)
-    {
-        printMonthCalendar(i, year);
-    }
-}
-
-DateCompare MyDate::compareDate(MyDate Date1, MyDate Date2)
-{
-    if (IsDate1BeforeDate2(Date1, Date2))
-        return DateCompare::BEFORE;
-
-    if (IsDate1AfterDate2(Date1, Date2))
-        return DateCompare::AFTER;
-
-    return DateCompare::EQUAL;
 }

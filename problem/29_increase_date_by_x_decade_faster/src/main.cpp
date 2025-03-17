@@ -1,15 +1,17 @@
-#include <iostream>
-#include "date.hpp"
+#include "ReadDate.hpp"
+#include "increase.hpp"
 #include "InputNumber.hpp"
+#include <iostream>
 
 int main()
 {
-    MyDate date = date.readFullDate();
+    MyDate Date = ReadDate::readFullDate();
     unsigned short decades = InputNumber::readNumberInRange("Enter a number of decades: ", 1, 1000);
-    date = date.increaseDateByXDecadesFaster(decades, date);
+
+    Date = Increase::increaseDateByXDecadesFaster(decades, Date);
 
     std::cout << "\nAdding " << decades << " decades is: "
-              << date.day << "/" << date.month << "/" << date.year << std::endl;
+              << Date.day << "/" << Date.month << "/" << Date.year << std::endl;
 
     return 0;
 }

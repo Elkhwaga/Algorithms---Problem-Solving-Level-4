@@ -1,5 +1,5 @@
-#ifndef INPUTUSER_H
-#define INPUTUSER_H
+#ifndef INPUT_NUMBER_HPP
+#define INPUT_NUMBER_HPP
 #include <string>
 
 namespace InputNumber

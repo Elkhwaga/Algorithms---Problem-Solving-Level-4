@@ -1,10 +1,11 @@
-#include "date.hpp"
+#include "ReadDate.hpp"
+#include "display.hpp"
 
 int main()
 {
-    std::string year = MyDate::readYear();
+    unsigned short year = std::stoi(ReadDate::readYear());
 
-    MyDate::printYearCalendar(std::stoi(year));
+    Display::printYearCalendar(year);
 
     return 0;
 }

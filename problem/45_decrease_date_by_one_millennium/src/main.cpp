@@ -1,13 +1,14 @@
+#include "ReadDate.hpp"
+#include "decrease.hpp"
 #include <iostream>
-#include "date.hpp"
 
 int main()
 {
-    MyDate date = date.readFullDate();
-    date = date.decreaseDateByOneMillennium(date);
+    MyDate Date = ReadDate::readFullDate();
+    Date = Decrease::decreaseDateByOneMillennium(Date);
 
     std::cout << "\nSubtracting one millennium is: "
-              << date.day << "/" << date.month << "/" << date.year << std::endl;
+              << Date.day << "/" << Date.month << "/" << Date.year << std::endl;
 
     return 0;
 }

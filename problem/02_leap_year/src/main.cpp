@@ -1,12 +1,12 @@
-#include <iostream>
-#include "date.hpp"
+#include "ReadDate.hpp"
 #include "enums.hpp"
+#include <iostream>
 
 int main()
 {
-    std::string year = MyDate::readYear();
+    unsigned short year = std::stoi(ReadDate::readYear());
 
-    if (Enums::isLeapYear(std::stoi(year)) == LeapYearType::LEAP_YEAR)
+    if (Enums::isLeapYear(year) == LeapYearType::LEAP_YEAR)
         std::cout << year << " is a leap year." << std::endl;
     else
         std::cout << year << " is not a leap year." << std::endl;

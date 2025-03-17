@@ -1,15 +1,17 @@
-#include <iostream>
-#include "date.hpp"
+#include "ReadDate.hpp"
+#include "decrease.hpp"
 #include "InputNumber.hpp"
+#include <iostream>
 
 int main()
 {
-    MyDate date = date.readFullDate();
+    MyDate Date = ReadDate::readFullDate();
     unsigned short weeks = InputNumber::readNumberInRange("Enter a number of weeks: ", 1, 1000);
-    date = date.decreaseDateByXWeeks(weeks, date);
+
+    Date = Decrease::decreaseDateByXWeeks(weeks, Date);
 
     std::cout << "\nSubtracting " << weeks << " weeks is: "
-              << date.day << "/" << date.month << "/" << date.year << std::endl;
+              << Date.day << "/" << Date.month << "/" << Date.year << std::endl;
 
     return 0;
 }

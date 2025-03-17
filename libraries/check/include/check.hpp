@@ -1,5 +1,5 @@
-#ifndef CHECK_H
-#define CHECK_H
+#ifndef CHECK_HPP
+#define CHECK_HPP
 
 namespace Check
 {

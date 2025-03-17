@@ -1,15 +1,17 @@
-#include <iostream>
-#include "date.hpp"
+#include "ReadDate.hpp"
+#include "increase.hpp"
 #include "InputNumber.hpp"
+#include <iostream>
 
 int main()
 {
-    MyDate date = date.readFullDate();
+    MyDate Date = ReadDate::readFullDate();
     unsigned short years = InputNumber::readNumberInRange("Enter a number of years: ", 1, 1000);
-    date = date.increaseDateByXYearFaster(years, date);
+
+    Date = Increase::increaseDateByXYearFaster(years, Date);
 
     std::cout << "\nAdding " << years << " years is: "
-              << date.day << "/" << date.month << "/" << date.year << std::endl;
+              << Date.day << "/" << Date.month << "/" << Date.year << std::endl;
 
     return 0;
 }

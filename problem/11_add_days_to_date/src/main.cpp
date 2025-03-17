@@ -1,11 +1,11 @@
 #include <iostream>
 #include "date.hpp"
+#include "ReadDate.hpp"
 #include "InputNumber.hpp"
 
 void printResult()
 {
-    MyDate date;
-    date = date.readFullDate();
+    MyDate date = ReadDate::readFullDate();
     unsigned short days = InputNumber::readNumberInRange("How many days to add: ", 1, 10000);
     date = date.dateAddDays(days);
 

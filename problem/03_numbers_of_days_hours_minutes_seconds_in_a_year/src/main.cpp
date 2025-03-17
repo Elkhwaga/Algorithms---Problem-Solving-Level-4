@@ -1,5 +1,6 @@
-#include <iostream>
 #include "date.hpp"
+#include "ReadDate.hpp"
+#include <iostream>
 
 void printDaysHoursMinutesSeconds(unsigned short year)
 {
@@ -14,7 +15,7 @@ void printDaysHoursMinutesSeconds(unsigned short year)
 
 int main()
 {
-    std::string year = MyDate::readYear();
+    unsigned short year = std::stoi(ReadDate::readYear());
 
-    printDaysHoursMinutesSeconds(std::stoi(year));
+    printDaysHoursMinutesSeconds(year);
 }

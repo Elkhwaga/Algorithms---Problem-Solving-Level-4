@@ -1,15 +1,16 @@
-#include <iostream>
-#include "date.hpp"
+#include "ReadDate.hpp"
+#include "work.hpp"
 #include "InputNumber.hpp"
+#include <iostream>
 
 int main()
 {
     std::cout << "Vacation Start Date: " << std::endl;
-    MyDate DateOfVacationStart = DateOfVacationStart.readFullDate();
+    MyDate DateOfVacationStart = ReadDate::readFullDate();
 
     unsigned short vacationDays = InputNumber::readNumberInRange("Enter a number of vacation days: ", 1, 50);
 
-    MyDate ReturnDate = ReturnDate.calculateVacationDays(DateOfVacationStart, vacationDays);
+    MyDate ReturnDate = Work::calculateVacationDays(DateOfVacationStart, vacationDays);
 
     std::cout << "Return Date: " << ReturnDate.day << "/" << ReturnDate.month << "/" << ReturnDate.year << std::endl;
 

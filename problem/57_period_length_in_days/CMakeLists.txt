@@ -1,0 +1,3 @@
+add_executable(period_length_in_days src/main.cpp)
+
+target_link_libraries(period_length_in_days date)

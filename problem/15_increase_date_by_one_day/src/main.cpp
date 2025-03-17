@@ -1,14 +1,15 @@
+#include "ReadDate.hpp"
+#include "increase.hpp"
 #include <iostream>
-#include "date.hpp"
 
 int main()
 {
-    MyDate Date1 = Date1.readFullDate();
+    MyDate Date = ReadDate::readFullDate();
 
-    Date1 = Date1.increaseDateByOneDay(Date1);
+    Date = Increase::increaseDateByOneDay(Date);
 
     std::cout << "\nDate after adding on day is: "
-              << Date1.day << "/" << Date1.month << "/" << Date1.year << std::endl;
+              << Date.day << "/" << Date.month << "/" << Date.year << std::endl;
 
     return 0;
 }

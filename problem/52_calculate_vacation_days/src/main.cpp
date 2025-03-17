@@ -1,14 +1,14 @@
+#include "ReadDate.hpp"
+#include "work.hpp"
 #include <iostream>
-#include "date.hpp"
 
 int main()
 {
-    ;
     std::cout << "Vacation Start Date: " << std::endl;
-    MyDate DateOfVacationStart = DateOfVacationStart.readFullDate();
+    MyDate DateOfVacationStart = ReadDate::readFullDate();
 
     std::cout << "Vacation End Date: " << std::endl;
-    MyDate DateOfVacationEnd = DateOfVacationEnd.readFullDate();
+    MyDate DateOfVacationEnd = ReadDate::readFullDate();
 
     std::cout << "Vacation Start Date: "
               << MyDate::dayShortName(MyDate::dayOfWeekOrder(DateOfVacationStart))
@@ -20,7 +20,7 @@ int main()
               << " , " << DateOfVacationEnd.day << "/" << DateOfVacationEnd.month << "/" << DateOfVacationEnd.year
               << std::endl;
 
-    std::cout << "\nVacation days is: " << MyDate::calculateVacationDays(DateOfVacationStart, DateOfVacationEnd) << std::endl;
+    std::cout << "\nVacation days is: " << Work::calculateVacationDays(DateOfVacationStart, DateOfVacationEnd) << std::endl;
 
     return 0;
 }
