@@ -393,6 +393,137 @@ MyDate MyDate::increaseDateByOneMillennium(MyDate Date)
     return Date;
 }
 
+MyDate MyDate::decreaseDateByOneDay(MyDate Date)
+{
+    if (this->isFirstDayInMonth(Date))
+    {
+        if (this->isFirstMonthInYear(Date.month))
+        {
+            Date.month = 12;
+            Date.day = 31;
+            Date.year--;
+        }
+        else
+        {
+            Date.day = this->numberOfDaysInMonth(Date.month, Date.year);
+            Date.month--;
+        }
+    }
+    else
+    {
+        Date.day--;
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXDays(unsigned short days, MyDate Date)
+{
+    for (unsigned short i = 1; i <= days; i++)
+    {
+        Date = this->decreaseDateByOneDay(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneWeek(MyDate Date)
+{
+    for (unsigned short i = 1; i <= 7; i++)
+    {
+        Date = this->decreaseDateByOneDay(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXWeeks(unsigned short weeks, MyDate Date)
+{
+    for (unsigned short i = 1; i <= weeks; i++)
+    {
+        Date = this->decreaseDateByOneWeek(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneMonth(MyDate Date)
+{
+    if (this->isFirstMonthInYear(Date.month))
+    {
+        Date.month = 12;
+        Date.year--;
+    }
+    else
+        Date.month--;
+
+    unsigned short numberOfDaysInCurrentMonth = this->numberOfDaysInMonth(Date.month, Date.year);
+
+    if (Date.day > numberOfDaysInCurrentMonth)
+        Date.day = numberOfDaysInCurrentMonth;
+
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXMonth(unsigned short months, MyDate Date)
+{
+    for (unsigned short i = 1; i <= months; i++)
+    {
+        Date = this->decreaseDateByOneMonth(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneYear(MyDate Date)
+{
+    Date.year--;
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXYear(unsigned short years, MyDate Date)
+{
+    for (unsigned short i = 1; i <= years; i++)
+    {
+        Date = this->decreaseDateByOneYear(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXYearFaster(unsigned short years, MyDate Date)
+{
+    Date.year -= years;
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneDecade(MyDate Date)
+{
+    Date.year -= 10;
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXDecade(unsigned short decade, MyDate Date)
+{
+    for (unsigned short i = 1; i <= decade; i++)
+    {
+        Date = this->decreaseDateByOneDecade(Date);
+    }
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByXDecadesFaster(unsigned short decade, MyDate Date)
+{
+    Date.year -= (decade * 10);
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneCentury(MyDate Date)
+{
+    Date.year -= 100;
+    return Date;
+}
+
+MyDate MyDate::decreaseDateByOneMillennium(MyDate Date)
+{
+    Date.year -= 1000;
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
@@ -430,9 +561,19 @@ bool MyDate::isValidDate(MyDate Date)
     return true;
 }
 
+bool MyDate::isFirstDayInMonth(MyDate Date)
+{
+    return (Date.day == 1);
+}
+
 bool MyDate::isLastDayInMonth(MyDate Date)
 {
     return (Date.day == numberOfDaysInMonth(Date.month, Date.year));
+}
+
+bool MyDate::isFirstMonthInYear(unsigned short month)
+{
+    return month == 1;
 }
 
 bool MyDate::isLastMonthInYear(unsigned short month)
