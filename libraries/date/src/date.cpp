@@ -387,6 +387,12 @@ MyDate MyDate::increaseDateByOneCentury(MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneMillennium(MyDate Date)
+{
+    Date.year += 1000;
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
