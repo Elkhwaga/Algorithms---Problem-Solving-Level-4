@@ -222,6 +222,21 @@ unsigned short MyDate::daysUtilTheEndOfYear(MyDate Date)
     return getdifferenceInDays(Date, EndOfYearDate, true);
 }
 
+unsigned short MyDate::calculateVacationDays(MyDate DateOfVacationStart, MyDate DateOfVacationEnd)
+{
+    unsigned short days = 0;
+
+    while (IsDate1BeforeDate2(DateOfVacationStart, DateOfVacationEnd))
+    {
+        if (isBusinessDay(DateOfVacationStart))
+            days++;
+
+        DateOfVacationStart = DateOfVacationStart.increaseDateByOneDay(DateOfVacationStart);
+    }
+
+    return days;
+}
+
 MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year)
 {
     unsigned short remainingDays = dayOrderInYear;

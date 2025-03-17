@@ -51,6 +51,8 @@ struct MyDate
 
     static unsigned short daysUtilTheEndOfYear(MyDate Date);
 
+    static unsigned short calculateVacationDays(MyDate DateOfVacationStart, MyDate DateOfVacationEnd);
+
     MyDate getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year);
 
     MyDate readFullDate();
