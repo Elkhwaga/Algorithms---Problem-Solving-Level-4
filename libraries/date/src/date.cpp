@@ -354,6 +354,12 @@ MyDate MyDate::increaseDateByXYear(unsigned short years, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByXYearFaster(unsigned short years, MyDate Date)
+{
+    Date.year += years;
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
