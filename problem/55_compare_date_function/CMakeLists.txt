@@ -1,0 +1,3 @@
+add_executable(compare_date_function src/main.cpp)
+
+target_link_libraries(compare_date_function date)

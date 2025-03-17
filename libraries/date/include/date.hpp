@@ -2,6 +2,7 @@
 #define MYDATE_H
 
 #include <string>
+#include "enums.hpp"
 
 struct MyDate
 {
@@ -146,6 +147,8 @@ struct MyDate
     static void printMonthCalendar(unsigned short month, unsigned short year);
 
     static void printYearCalendar(unsigned short year);
+
+    static DateCompare compareDate(MyDate Date1, MyDate Date2);
 };
 
 #endif

@@ -3,7 +3,6 @@
 #include "date.hpp"
 #include "utils.hpp"
 #include "check.hpp"
-#include "enum.hpp"
 #include "InputValidation.hpp"
 #include <iostream>
 #include <ctime>
@@ -726,4 +725,15 @@ void MyDate::printYearCalendar(unsigned short year)
     {
         printMonthCalendar(i, year);
     }
+}
+
+DateCompare MyDate::compareDate(MyDate Date1, MyDate Date2)
+{
+    if (IsDate1BeforeDate2(Date1, Date2))
+        return DateCompare::BEFORE;
+
+    if (IsDate1AfterDate2(Date1, Date2))
+        return DateCompare::AFTER;
+
+    return DateCompare::EQUAL;
 }

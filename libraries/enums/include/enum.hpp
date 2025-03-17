@@ -12,3 +12,10 @@ enum class DateType
     MINUTE = 60,
     SECOND = 60
 };
+
+enum class DateCompare
+{
+    BEFORE = -1,
+    EQUAL = 0,
+    AFTER = 1
+};
