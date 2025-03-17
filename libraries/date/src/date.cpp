@@ -360,6 +360,12 @@ MyDate MyDate::increaseDateByXYearFaster(unsigned short years, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneDecade(MyDate Date)
+{
+    Date.year += 10;
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);

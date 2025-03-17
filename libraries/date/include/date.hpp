@@ -69,6 +69,8 @@ struct MyDate
 
     MyDate increaseDateByXYearFaster(unsigned short years, MyDate Date);
 
+    MyDate increaseDateByOneDecade(MyDate Date);
+
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
     static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
