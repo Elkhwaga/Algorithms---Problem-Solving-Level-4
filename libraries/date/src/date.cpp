@@ -339,6 +339,21 @@ MyDate MyDate::increaseDateByXMonth(unsigned short months, MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByOneYear(MyDate Date)
+{
+    Date.year++;
+    return Date;
+}
+
+MyDate MyDate::increaseDateByXYear(unsigned short years, MyDate Date)
+{
+    for (unsigned short i = 1; i <= years; i++)
+    {
+        Date = this->increaseDateByOneYear(Date);
+    }
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);

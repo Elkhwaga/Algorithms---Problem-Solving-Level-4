@@ -63,6 +63,10 @@ struct MyDate
 
     MyDate increaseDateByXMonth(unsigned short months, MyDate Date);
 
+    MyDate increaseDateByOneYear(MyDate Date);
+
+    MyDate increaseDateByXYear(unsigned short years, MyDate Date);
+
     static bool IsDate1BeforeDate2(MyDate Date1, MyDate Date2);
 
     static bool IsDate1EqualDate2(MyDate Date1, MyDate Date2);
