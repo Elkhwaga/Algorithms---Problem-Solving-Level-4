@@ -613,6 +613,11 @@ bool MyDate::IsDate1BeforeDate2(MyDate Date1, MyDate Date2)
                : ((Date1.year == Date2.year) ? (Date1.month < Date2.month ? true : (Date1.month == Date2.month ? Date1.day < Date2.day : false)) : false);
 }
 
+bool MyDate::IsDate1AfterDate2(MyDate Date1, MyDate Date2)
+{
+    return !IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualDate2(Date1, Date2);
+}
+
 bool MyDate::IsDate1EqualDate2(MyDate Date1, MyDate Date2)
 {
     return (Date1.year == Date2.year)
