@@ -1,0 +1,3 @@
+add_executable(27_increase_date_by_one_decade src/main.cpp)
+
+target_link_libraries(27_increase_date_by_one_decade date input)
