@@ -16,6 +16,8 @@ struct Period
     static bool isDateInPeriod(MyDate Date, Period Period);
 
     static unsigned int periodLengthInDays(Period Period, bool includeEndDate = false);
+
+    static unsigned int countOverlapDays(Period Period1, Period Period2);
 };
 
 #endif
