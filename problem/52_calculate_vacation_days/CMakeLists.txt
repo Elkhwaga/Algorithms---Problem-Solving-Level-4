@@ -1,0 +1,3 @@
+add_executable(calculate_vacation_days src/main.cpp)
+
+target_link_libraries(calculate_vacation_days date)
