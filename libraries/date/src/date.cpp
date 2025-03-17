@@ -366,6 +366,15 @@ MyDate MyDate::increaseDateByOneDecade(MyDate Date)
     return Date;
 }
 
+MyDate MyDate::increaseDateByXDecade(unsigned short decade, MyDate Date)
+{
+    for (unsigned short i = 1; i <= decade; i++)
+    {
+        Date = this->increaseDateByOneDecade(Date);
+    }
+    return Date;
+}
+
 MyDate MyDate::getSystemDate()
 {
     time_t t = time(0);
