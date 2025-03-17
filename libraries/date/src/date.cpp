@@ -144,6 +144,11 @@ unsigned short MyDate::dayOfWeekOrder(unsigned short day, unsigned short month, 
     return (day + Y + (Y / 4) - (Y / 100) + (Y / 400) + ((31 * M) / 12)) % 7;
 }
 
+unsigned short MyDate::dayOfWeekOrder(MyDate Date)
+{
+    return dayOfWeekOrder(Date.day, Date.month, Date.year);
+}
+
 std::string MyDate::dayShortName(unsigned short dayOfWeekOrder)
 {
     std::string arrDayNames[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -190,6 +195,31 @@ unsigned int MyDate::getdifferenceInDays(MyDate Date1, MyDate Date2, bool includ
     }
 
     return includeEnfDay ? ++days * swapFlag : days * swapFlag;
+}
+
+unsigned short MyDate::daysUtilTheEndOfWeek(MyDate Date)
+{
+    return 6 - dayOfWeekOrder(Date);
+}
+
+unsigned short MyDate::daysUtilTheEndOfMonth(MyDate Date)
+{
+    MyDate EndOfMonthDate;
+    EndOfMonthDate.day = numberOfDaysInMonth(Date.month, Date.year);
+    EndOfMonthDate.month = Date.month;
+    EndOfMonthDate.year = Date.year;
+
+    return getdifferenceInDays(Date, EndOfMonthDate, true);
+}
+
+unsigned short MyDate::daysUtilTheEndOfYear(MyDate Date)
+{
+    MyDate EndOfYearDate;
+    EndOfYearDate.day = 31;
+    EndOfYearDate.month = 12;
+    EndOfYearDate.year = Date.year;
+
+    return getdifferenceInDays(Date, EndOfYearDate, true);
 }
 
 MyDate MyDate::getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year)
@@ -579,6 +609,22 @@ bool MyDate::isFirstMonthInYear(unsigned short month)
 bool MyDate::isLastMonthInYear(unsigned short month)
 {
     return (month == 12);
+}
+
+bool MyDate::isEndOfWeek(MyDate Date)
+{
+    return dayOfWeekOrder(Date) == 6;
+}
+
+bool MyDate::isWeekEnd(MyDate Date)
+{
+    unsigned short day = dayOfWeekOrder(Date);
+    return (day == 5 || day == 6);
+}
+
+bool MyDate::isBusinessDay(MyDate Date)
+{
+    return !isWeekEnd(Date);
 }
 
 void MyDate::swapDate(MyDate &Date1, MyDate &Date2)

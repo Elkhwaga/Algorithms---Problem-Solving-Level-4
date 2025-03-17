@@ -35,6 +35,8 @@ struct MyDate
 
     static unsigned short dayOfWeekOrder(unsigned short day, unsigned short month, unsigned short year);
 
+    static unsigned short dayOfWeekOrder(MyDate Date);
+
     static std::string dayShortName(unsigned short dayOfWeekOrder);
 
     static std::string monthShortName(unsigned short monthNumber);
@@ -42,6 +44,12 @@ struct MyDate
     static unsigned short numberOfDaysFromBeginningOfTheYear(unsigned short day, unsigned short month, unsigned short year);
 
     static unsigned int getdifferenceInDays(MyDate Date1, MyDate Date2, bool includeEnfDay = false);
+
+    static unsigned short daysUtilTheEndOfWeek(MyDate Date);
+
+    static unsigned short daysUtilTheEndOfMonth(MyDate Date);
+
+    static unsigned short daysUtilTheEndOfYear(MyDate Date);
 
     MyDate getDateFromDayOrderInYear(unsigned short dayOrderInYear, unsigned short year);
 
@@ -120,6 +128,12 @@ struct MyDate
     static bool isFirstMonthInYear(unsigned short month);
 
     static bool isLastMonthInYear(unsigned short month);
+
+    static bool isEndOfWeek(MyDate Date);
+
+    static bool isWeekEnd(MyDate Date);
+
+    static bool isBusinessDay(MyDate Date);
 
     static void swapDate(MyDate &Date1, MyDate &Date2);
 
