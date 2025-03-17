@@ -1,6 +1,5 @@
 #include <iostream>
 #include "date.hpp"
-#include "InputNumber.hpp"
 
 int main()
 {
